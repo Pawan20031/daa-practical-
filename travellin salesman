@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+int travlling(int graph[][4], int s)
+{
+
+    vector<int> v;
+    for (int i = 0; i < 4; i++)
+        if (i != s)
+            v.push_back(i);
+
+    int minpath = INT_MAX;
+    do
+    {
+
+        int pathweight = 0;
+
+        int k = s;
+        for (int i = 0; i < v.size(); i++)
+        {
+            pathweight += graph[k][v[i]];
+            k = v[i];
+        }
+        pathweight += graph[k][s];
+
+        minpath = min(minpath, pathweight);
+
+    } while (
+        next_permutation(v.begin(), v.end()));
+
+    return minpath;
+}
+
+int main()
+{
+    int n;
+    cout << "Enter the size : ";
+    cin >> n;
+    cout << "Enter the matrix : " << endl;
+    int graph[n][4];
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            cin >> graph[i][j];
+        }
+    }
+    int s = 0;
+    cout << travlling(graph, s) << endl;
+    return 0;
+}
